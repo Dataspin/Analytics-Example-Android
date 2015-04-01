@@ -9,9 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="config"
+        android:text="..."
         android:id="@+id/configLabel"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/setupButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -28,29 +28,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register Device"
-        android:id="@+id/registerDeviceButton"
-        android:layout_below="@+id/registerUserButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Register User"
         android:id="@+id/registerUserButton"
         android:layout_below="@+id/statusLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/endSessionButton"
-        android:layout_toStartOf="@+id/endSessionButton" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start Session"
-        android:id="@+id/startSessionButton"
-        android:layout_below="@+id/registerDeviceButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/registerDeviceButton"
@@ -59,9 +39,29 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Register Device"
+        android:id="@+id/registerDeviceButton"
+        android:layout_below="@+id/registerUserButton"
+        android:layout_alignRight="@+id/registerDeviceButton"
+        android:layout_alignEnd="@+id/registerDeviceButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Session"
+        android:id="@+id/startSessionButton"
+        android:layout_below="@+id/registerDeviceButton"
+        android:layout_alignRight="@+id/registerDeviceButton"
+        android:layout_alignEnd="@+id/registerDeviceButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="End Session"
         android:id="@+id/endSessionButton"
-        android:layout_alignBottom="@+id/startSessionButton"
+        android:layout_alignTop="@+id/startSessionButton"
         android:layout_toRightOf="@+id/registerDeviceButton"
         android:layout_toEndOf="@+id/registerDeviceButton" />
 
@@ -70,43 +70,41 @@
         android:layout_height="wrap_content"
         android:text="Get Items"
         android:id="@+id/getItemsButton"
-        android:layout_below="@+id/startSessionButton"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/itemsSpinner"
-        android:layout_toStartOf="@+id/itemsSpinner" />
+        android:layout_below="@+id/endSessionButton"
+        android:layout_alignRight="@+id/getEventsButton"
+        android:layout_alignEnd="@+id/getEventsButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get Events"
         android:id="@+id/getEventsButton"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/getItemsButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/itemsSpinner"
-        android:layout_alignBottom="@+id/getItemsButton"
         android:spinnerMode="dropdown"
-        android:layout_alignRight="@+id/endSessionButton"
-        android:layout_alignEnd="@+id/endSessionButton"
-        android:layout_toRightOf="@+id/getEventsButton"
-        android:layout_toEndOf="@+id/getEventsButton"
-        android:layout_below="@+id/startSessionButton" />
+        android:layout_alignTop="@+id/getItemsButton"
+        android:layout_toRightOf="@+id/getItemsButton"
+        android:layout_above="@+id/getEventsButton"
+        android:layout_alignRight="@+id/eventsSpinner"
+        android:layout_alignEnd="@+id/eventsSpinner" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/eventsSpinner"
         android:spinnerMode="dropdown"
+        android:layout_below="@+id/itemsSpinner"
+        android:layout_toRightOf="@+id/getItemsButton"
         android:layout_alignBottom="@+id/getEventsButton"
-        android:layout_toRightOf="@+id/getEventsButton"
-        android:layout_alignTop="@+id/getEventsButton"
-        android:layout_alignRight="@+id/itemsSpinner"
-        android:layout_alignEnd="@+id/itemsSpinner" />
+        android:layout_alignRight="@+id/endSessionButton"
+        android:layout_alignEnd="@+id/endSessionButton" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -114,11 +112,11 @@
         android:layout_height="wrap_content"
         android:text="Buy"
         android:id="@+id/buyButton"
-        android:layout_alignBottom="@+id/itemsSpinner"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/endSessionButton"
-        android:layout_toEndOf="@+id/endSessionButton" />
+        android:layout_alignTop="@+id/itemsSpinner"
+        android:layout_alignLeft="@+id/registerCustomEventButton"
+        android:layout_alignStart="@+id/registerCustomEventButton"
+        android:layout_alignRight="@+id/registerCustomEventButton"
+        android:layout_alignEnd="@+id/registerCustomEventButton" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -126,56 +124,17 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/registerCustomEventButton"
-        android:layout_alignBottom="@+id/eventsSpinner"
-        android:layout_toRightOf="@+id/eventsSpinner"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get tasks"
-        android:id="@+id/getBacklogTasks"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/setupButton"
-        android:layout_alignTop="@+id/setupButton"
-        android:layout_toRightOf="@+id/setupButton"
-        android:layout_toEndOf="@+id/setupButton" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/apiKeyField"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/endSessionButton"
-        android:layout_toStartOf="@+id/endSessionButton"
-        android:text="43ea8f0b9db51c481d75db81d402cf68c6988f08"
-        android:lines="1"
-        android:elegantTextHeight="false"
-        android:visibility="visible"
-        android:singleLine="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/clientLabel"
-        android:layout_above="@+id/apiKeyField"
-        android:layout_alignRight="@+id/apiKeyField"
-        android:layout_alignEnd="@+id/apiKeyField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:text="hyperbees" />
+        android:layout_below="@+id/buyButton"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Setup"
         android:id="@+id/setupButton"
-        android:layout_alignBottom="@+id/apiKeyField"
-        android:layout_alignLeft="@+id/endSessionButton"
-        android:layout_alignStart="@+id/endSessionButton" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

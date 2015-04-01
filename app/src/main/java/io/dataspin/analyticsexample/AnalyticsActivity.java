@@ -1,5 +1,8 @@
 package io.dataspin.analyticsexample;
 
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,7 +23,7 @@ import java.util.List;
 import io.dataspin.analyticsSDK.*;
 
 
-public class AnalyticsActivity extends ActionBarActivity implements IDataspinListener {
+public class AnalyticsActivity extends ActionBarActivity implements IDataspinListener, SetupDialogFragment.NoticeDialogListener {
 
     private Spinner itemsSpinner;
     private Spinner eventsSpinner;
@@ -33,6 +36,7 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
 
     private Button setupButton;
     private Button registerUserButton;
+    private Button registerConfirmButton;
     private Button registerDeviceButton;
     private Button startSessionButton;
     private Button endSessionButton;
@@ -55,7 +59,7 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
         new DataspinManager(this);
 
         apiKeyLabel = (TextView) findViewById(R.id.apiKeyField);
-        clientNameLabel = (TextView) findViewById(R.id.clientLabel);
+        //clientNameLabel = (TextView) findViewById(R.id.clientLabel);
         configLabel = (TextView) findViewById(R.id.configLabel);
         statusLabel = (TextView) findViewById(R.id.statusLabel);
 
@@ -63,10 +67,22 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
         setupButton.setEnabled(true);
         setupButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                /*
                 statusLabel.setText("Dataspin setup! APIKey: "+apiKeyLabel.getText().toString());
                 registerUserButton.setEnabled(true);
                 DataspinManager.Instance().SetApiKey(clientNameLabel.getText().toString(), apiKeyLabel.getText().toString(), "1.0", true, context);
                 configLabel.setText(clientNameLabel.getText().toString()+", Key:"+apiKeyLabel.getText().toString()+", Version 1.0, Debug mode");
+                */
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+
+                DialogFragment newFragment = new SetupDialogFragment();
+                newFragment.show(ft, "registerUser");
             }
         });
 
@@ -76,7 +92,18 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
         registerUserButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 statusLabel.setText("Registering user...");
-                DataspinManager.Instance().RegisterUser("Jan", "Karol", "zawsze.drugi@watykan.io", null, null);
+                //DataspinManager.Instance().RegisterUser("Jan", "Karol", "zawsze.drugi@watykan.io", null, null);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+
+                DialogFragment newFragment = new RegisterUserDialogFragment();
+                newFragment.show(ft, "registerUser");
+
             }
         });
 
@@ -174,7 +201,7 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
         });
 
 
-        getBacklogTasksButton = (Button) findViewById(R.id.getBacklogTasks);
+        /*getBacklogTasksButton = (Button) findViewById(R.id.getBacklogTasks);
         getBacklogTasksButton.setEnabled(true);
         getBacklogTasksButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -182,6 +209,7 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
                 DataspinManager.Instance().GetAllTasks();
             }
         });
+        */
     }
 
 
@@ -286,5 +314,14 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
     @Override
     public void OnError(DataspinError dataspinError) {
         //statusLabel.setText("Error! See logcat for more details.");
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, String name, String key, String version) {
+        DataspinManager.Instance().SetApiKey(name, key, version, true, getApplicationContext());
+
+        statusLabel.setText("Dataspin setup!");
+        registerUserButton.setEnabled(true);
+        configLabel.setText(name+", Key:"+key+", Version "+version+", Debug mode");
     }
 }
