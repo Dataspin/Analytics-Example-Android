@@ -51,8 +51,8 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
         final Context context = this.getApplicationContext();
         super.onCreate(savedInstanceState);
 
-        TracelyManager.SetApiKey("33bbfb23d4c55e2f61a9317f4ac1ed99891c8d52");
-        TracelyManager.RegisterExceptionHandler(getApplicationContext());
+        //TracelyManager.SetApiKey("33bbfb23d4c55e2f61a9317f4ac1ed99891c8d52");
+        //TracelyManager.RegisterExceptionHandler(getApplicationContext());
 
         setContentView(R.layout.activity_analytics);
 
@@ -148,7 +148,7 @@ public class AnalyticsActivity extends ActionBarActivity implements IDataspinLis
         getEventsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 statusLabel.setText("Getting events...");
-                DataspinManager.Instance().GetEvents();
+                //DataspinManager.Instance().GetEvents();
             }
         });
 
